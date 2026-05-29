@@ -23,14 +23,14 @@ C Code Style Converter is a Python-based desktop application that helps develope
 
 ## Keyboard Shortcuts
 
-- `Ctrl + A`: Convert to Allman style
-- `Ctrl + K`: Convert to K&R style
-- `Ctrl + S`: Remove single-line comments
-- `Ctrl + M`: Remove multi-line comments
-- `Ctrl + R`: Remove all comments
-- `Ctrl + L`: Clear all panels
-- `Ctrl + C`: Copy output to clipboard
-- `Ctrl + B`: Remove single statement braces
+- `Ctrl + Alt + A`: Convert to Allman style
+- `Ctrl + Alt + K`: Convert to K&R style
+- `Ctrl + Alt + S`: Remove single-line comments
+- `Ctrl + Alt + M`: Remove multi-line comments
+- `Ctrl + Alt + R`: Remove all comments
+- `Ctrl + Alt + L`: Clear all panels
+- `Ctrl + Alt + C`: Copy output to clipboard
+- `Ctrl + Alt + B`: Remove unnecessary braces
 
 ## Requirements
 
@@ -53,7 +53,7 @@ cd C Code Style Converter
 
 3. Run the application:
 ```bash
-python main.py
+python "C Style Converter.py"
 ```
 
 ## Usage

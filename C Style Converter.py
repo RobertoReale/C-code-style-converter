@@ -21,6 +21,9 @@ class StyleConverter:
         string_char = None
         i = 0
         while i < pos:
+            if line[i] == '\\' and in_string:
+                i += 2  # skip escaped character (e.g. \" or \')
+                continue
             if line[i] in '"\'':
                 if not in_string:
                     in_string = True
@@ -253,6 +256,9 @@ class StyleConverter:
                 string_char = None
                 i = 0
                 while i < len(line):
+                    if line[i] == '\\' and in_string:
+                        i += 2  # skip escaped character (e.g. \" or \')
+                        continue
                     if line[i] in '"\'':
                         if not in_string:
                             in_string = True
@@ -510,7 +516,7 @@ class StyleConverterGUI:
         
         # Configure main frame grid
         self.main_frame.grid_rowconfigure(1, weight=1)
-        self.main_frame.grid_rowconfigure(4, weight=1)
+        self.main_frame.grid_rowconfigure(5, weight=1)
         self.main_frame.grid_columnconfigure(0, weight=1)
         
         # Create widgets
@@ -695,13 +701,10 @@ class StyleConverterGUI:
             def process():
                 try:
                     if len(input_code) > 1024 * 1024:  # 1MB
-                        result = StyleConverter.process_in_chunks(
-                            input_code,
-                            1024 * 1024,  # 1MB chunks
-                            operation
-                        )
-                    else:
-                        result = operation(input_code)
+                        self.root.after(0, lambda: self.status_var.set(
+                            f"Processing large file: {operation_name}... (this may take a moment)"
+                        ))
+                    result = operation(input_code)
                         
                     self.root.after(0, lambda: self.set_output_text(result))
                     self.root.after(0, lambda: self.status_var.set("Ready"))
